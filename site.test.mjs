@@ -30,3 +30,14 @@ test('motion respects reduced motion, filters maintain accessibility and no trac
   assert.match(js, /setAttribute\('aria-expanded'/);
   assert.doesNotMatch(js, /analytics|gtag|pixel|fetch\(/i);
 });
+
+test('electric cyan brand replaces all legacy lime accents in both CSS and icon', () => {
+  const css = file('./styles.css');
+  const mark = file('./assets/mark.svg');
+  assert.match(css, /--electric:#78DDFB/);
+  assert.match(css, /\.hero-accent\{color:var\(--electric\)/);
+  assert.match(css, /\.button-primary\{background:var\(--electric\)/);
+  assert.match(css, /\.marquee\{background:var\(--electric\)/);
+  assert.match(mark, /#78DDFB/);
+  assert.doesNotMatch(css + mark, /--lime|var\(--lime\)|#dfff7e|#E6FF9A|#C0FF77|#E3FF92|#edffd0|rgba\(223,255,126/i);
+});
