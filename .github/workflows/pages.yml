@@ -1,0 +1,76 @@
+name: Publish Saarthi organization website
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate public marketing site
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - name: Test marketing copy, assets, accessibility and safety
+        run: |
+          node --test site.test.mjs
+          node --check site.js
+      - name: Build strict public-site allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/assets
+          cp index.html styles.css site.js _site/
+          cp assets/mark.svg _site/assets/
+          touch _site/.nojekyll
+          test -s _site/index.html
+          test -s _site/assets/mark.svg
+          echo "Only the static marketing entrypoint, CSS, script, mark and .nojekyll were staged."
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-marketing-site
+          path: _site/
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: public-marketing-site
+          path: _site
+      - name: Configure or enable Pages for this public repository
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload static Pages artifact only
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
