@@ -43,6 +43,7 @@ jobs:
           name: public-marketing-site
           path: _site/
           retention-days: 7
+          include-hidden-files: true
           if-no-files-found: error
 
   deploy:
