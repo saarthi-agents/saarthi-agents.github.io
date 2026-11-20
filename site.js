@@ -67,6 +67,23 @@
       card.hidden = group !== 'all' && card.dataset.group !== group;
     });
   }));
+  // Keep a real, keyboard-accessible three-way preference:
+  // device (auto), explicit light and explicit dark.
+  const theme = window.__saarthiTheme;
+  const themeButtons = [...document.querySelectorAll('[data-theme-choice]')];
+  const syncThemeControls = () => {
+    const selected = theme?.getChoice?.() ?? 'auto';
+    for (const button of themeButtons) {
+      button.setAttribute('aria-pressed', String(button.dataset.themeChoice === selected));
+    }
+  };
+  for (const button of themeButtons) {
+    button.addEventListener('click', () => {
+      if (theme?.setChoice?.(button.dataset.themeChoice)) syncThemeControls();
+    });
+  }
+  window.addEventListener('saarthi-theme-change', syncThemeControls);
+  syncThemeControls();
   const year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 })();
