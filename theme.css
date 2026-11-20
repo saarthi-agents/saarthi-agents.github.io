@@ -2,8 +2,8 @@
    Explicit light/dark themes with system fallback for JavaScript-disabled visitors. */
 :root {
   color-scheme: light;
-  --page: #f6f3f1;
-  --page-tint: #ede6f1;
+  --page: #f6f4fb;
+  --page-tint: #eeeaf7;
   --text: #262138;
   --secondary: #585269;
   --tertiary: #6b6277;
@@ -11,18 +11,18 @@
   --accent-strong: #523878;
   --accent-2: #ad7896;
   --coral: #bd746d;
-  --surface: rgba(255,255,255,.55);
-  --surface-strong: rgba(255,255,255,.72);
-  --surface-mauve: rgba(223,211,234,.47);
-  --surface-rose: rgba(245,224,225,.46);
-  --surface-deep: rgba(226,214,236,.50);
+  --surface: rgba(255,255,255,.25);
+  --surface-strong: rgba(255,255,255,.49);
+  --surface-mauve: rgba(221,207,242,.32);
+  --surface-rose: rgba(248,220,229,.28);
+  --surface-deep: rgba(220,211,243,.31);
   --line: rgba(83,65,103,.17);
   --line-strong: rgba(105,79,151,.30);
   --glint: rgba(255,255,255,.67);
   --shadow: rgba(64,45,85,.09);
   --grid-dot: rgba(93,69,123,.18);
-  --ambient-1: rgba(160,133,203,.18);
-  --ambient-2: rgba(225,155,167,.14);
+  --ambient-1: rgba(170,143,229,.29);
+  --ambient-2: rgba(238,172,192,.25);
   --glass-button: rgba(113,83,150,.16);
   --glass-button-hover: rgba(113,83,150,.25);
   --code-ink: #392851;
@@ -42,18 +42,18 @@
   --accent-strong: #f1dafa;
   --accent-2: #e6b4c9;
   --coral: #f1b4a0;
-  --surface: rgba(49,39,65,.48);
-  --surface-strong: rgba(66,53,82,.64);
-  --surface-mauve: rgba(108,81,126,.31);
-  --surface-rose: rgba(115,78,101,.29);
-  --surface-deep: rgba(52,42,72,.65);
+  --surface: rgba(40,33,60,.37);
+  --surface-strong: rgba(57,47,76,.59);
+  --surface-mauve: rgba(112,91,150,.26);
+  --surface-rose: rgba(137,88,117,.24);
+  --surface-deep: rgba(52,42,78,.43);
   --line: rgba(229,201,247,.19);
   --line-strong: rgba(225,184,244,.34);
   --glint: rgba(242,217,255,.12);
   --shadow: rgba(3,1,12,.32);
   --grid-dot: rgba(228,199,245,.10);
-  --ambient-1: rgba(119,73,157,.23);
-  --ambient-2: rgba(176,94,133,.15);
+  --ambient-1: rgba(127,90,187,.29);
+  --ambient-2: rgba(187,93,145,.18);
   --glass-button: rgba(202,165,229,.18);
   --glass-button-hover: rgba(202,165,229,.27);
   --code-ink: #f6e7fb;
@@ -68,12 +68,12 @@
     --page:#121019;--page-tint:#1b1726;--text:#f1ecf6;
     --secondary:#cec3d8;--tertiary:#b5a8c4;--accent:#d0b7ed;
     --accent-strong:#f1dafa;--accent-2:#e6b4c9;--coral:#f1b4a0;
-    --surface:rgba(49,39,65,.48);--surface-strong:rgba(66,53,82,.64);
-    --surface-mauve:rgba(108,81,126,.31);--surface-rose:rgba(115,78,101,.29);
-    --surface-deep:rgba(52,42,72,.65);--line:rgba(229,201,247,.19);
+    --surface:rgba(40,33,60,.37);--surface-strong:rgba(57,47,76,.59);
+    --surface-mauve:rgba(112,91,150,.26);--surface-rose:rgba(137,88,117,.24);
+    --surface-deep:rgba(52,42,78,.43);--line:rgba(229,201,247,.19);
     --line-strong:rgba(225,184,244,.34);--glint:rgba(242,217,255,.12);
     --shadow:rgba(3,1,12,.32);--grid-dot:rgba(228,199,245,.10);
-    --ambient-1:rgba(119,73,157,.23);--ambient-2:rgba(176,94,133,.15);
+    --ambient-1:rgba(127,90,187,.29);--ambient-2:rgba(187,93,145,.18);
     --glass-button:rgba(202,165,229,.18);--glass-button-hover:rgba(202,165,229,.27);
     --code-ink:#f6e7fb;--ink:var(--text);--cream:var(--page);--night:var(--page);
     --stroke:var(--line);
@@ -275,4 +275,179 @@ em, .story h2 em {color:var(--accent-strong);}
 @media (prefers-reduced-motion:reduce) {
   body {transition:none;}
   .theme-switcher button {transition:none;}
+}
+
+
+/* Editorial glassmorphism refinement — inspired by layered pastel analytics
+   surfaces, not an imitation of any dashboard artwork. All surfaces remain
+   translucent, with contrast supplied by theme-aware text and frosted edges. */
+:root {
+  --orb-lilac: rgba(193,176,246,.37);
+  --orb-blush: rgba(249,186,204,.29);
+  --orb-periwinkle: rgba(178,173,234,.28);
+  --glass-edge: rgba(255,255,255,.67);
+}
+:root[data-theme="dark"] {
+  --orb-lilac: rgba(102,74,162,.28);
+  --orb-blush: rgba(151,81,123,.18);
+  --orb-periwinkle: rgba(86,77,151,.22);
+  --glass-edge: rgba(238,211,255,.16);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --orb-lilac:rgba(102,74,162,.28);
+    --orb-blush:rgba(151,81,123,.18);
+    --orb-periwinkle:rgba(86,77,151,.22);
+    --glass-edge:rgba(238,211,255,.16);
+  }
+}
+html {scroll-padding-top:100px;}
+body {
+  overflow-x:clip;
+  background:
+    radial-gradient(ellipse 58% 33% at 7% 3%,var(--orb-lilac),transparent 85%),
+    radial-gradient(ellipse 58% 26% at 98% 26%,var(--orb-blush),transparent 80%),
+    radial-gradient(ellipse 68% 29% at 4% 65%,var(--orb-periwinkle),transparent 82%),
+    radial-gradient(ellipse 60% 30% at 94% 95%,var(--orb-lilac),transparent 80%),
+    var(--page);
+}
+section[id]{scroll-margin-top:105px;}
+
+/* True sticky placement: the header belongs to document flow, rather than
+   the old absolute overlay. Using overflow-x:clip keeps sticky functional. */
+.nav {
+  position:sticky;
+  inset:0 0 auto 0;
+  width:100%;
+  height:80px;
+  min-height:80px;
+  z-index:120;
+  background:var(--surface);
+  border-bottom:1px solid var(--glass-edge);
+  -webkit-backdrop-filter:blur(30px) saturate(145%);
+  backdrop-filter:blur(30px) saturate(145%);
+  box-shadow:0 1px 0 var(--line);
+  transition:background-color .25s ease,box-shadow .25s ease;
+}
+.nav.is-scrolled {
+  background:var(--surface-strong);
+  border-bottom-color:var(--line-strong);
+  box-shadow:0 12px 38px var(--shadow),inset 0 1px 0 var(--glass-edge);
+}
+.hero {
+  background:
+    radial-gradient(ellipse 46% 48% at 76% 48%,var(--orb-lilac),transparent 79%),
+    radial-gradient(ellipse 33% 27% at 32% 79%,var(--orb-blush),transparent 80%),
+    transparent;
+  min-height:760px;
+}
+.hero-inner{min-height:695px;}
+.hero-copy{padding:92px 0 92px;}
+.hero-halo{
+  background:radial-gradient(circle,var(--orb-periwinkle),transparent 71%);
+}
+.orbit-glow{
+  background:radial-gradient(circle,var(--orb-lilac) 0%,transparent 67%);
+}
+.center-core,.agent-node,.process-card,.story-panel,.role-card,
+.role-icon,.theme-switcher,.nav-links .nav-contact {
+  -webkit-backdrop-filter:blur(26px) saturate(140%);
+  backdrop-filter:blur(26px) saturate(140%);
+}
+.center-core,.agent-node,.process-card,.story-panel,.role-card {
+  border-color:var(--line-strong);
+  box-shadow:inset 0 1px 0 var(--glass-edge),0 16px 40px var(--shadow);
+}
+.center-core,.agent-node{
+  background:linear-gradient(140deg,var(--surface-strong),var(--surface));
+}
+.story-panel-dark,.story-panel-light,.process-card,.role-card {
+  background:linear-gradient(135deg,var(--surface-strong),var(--surface));
+}
+.story-panel-light,.process-art-three{
+  background:linear-gradient(135deg,var(--surface-rose),var(--surface));
+}
+.story-panel-dark,.process-art-one,.role-card.role-hero{
+  background:linear-gradient(135deg,var(--surface-mauve),var(--surface));
+}
+.process-art-two{
+  background:linear-gradient(135deg,var(--surface-deep),var(--surface-mauve));
+}
+.stack-art>div{
+  background:var(--surface-deep);
+  border:1px solid var(--glass-edge);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+.stack-art>div:nth-child(2){background:var(--surface-mauve);}
+.stack-art>div:nth-child(3){background:var(--surface-strong);}
+.stack-art>div:nth-child(4){background:var(--surface-rose);}
+.story,.process,.roles{
+  background:
+    radial-gradient(ellipse 38% 30% at 88% 20%,var(--orb-blush),transparent 85%),
+    transparent;
+}
+.manifesto,.trust{
+  background:linear-gradient(120deg,var(--surface-mauve),var(--surface));
+  -webkit-backdrop-filter:blur(28px) saturate(120%);
+  backdrop-filter:blur(28px) saturate(120%);
+}
+.marquee {
+  background:linear-gradient(90deg,var(--surface-mauve),var(--surface-strong),var(--surface-rose));
+}
+.closing{
+  background:linear-gradient(112deg,var(--surface-mauve),var(--surface-rose),var(--surface));
+}
+.footer{background:var(--surface);}
+
+/* Compact icon-only appearance selector with meaningful aria-labels in HTML. */
+.theme-switcher{
+  padding:4px;
+  gap:3px;
+  border-color:var(--line-strong);
+  border-radius:15px;
+  background:var(--surface);
+  -webkit-backdrop-filter:blur(26px) saturate(145%);
+  backdrop-filter:blur(26px) saturate(145%);
+}
+.theme-switcher button {
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  min-height:38px;
+  padding:0;
+  border-radius:11px;
+  color:var(--secondary);
+  touch-action:manipulation;
+}
+.theme-switcher button svg{
+  display:block;
+  width:19px;
+  height:19px;
+  flex-shrink:0;
+}
+.theme-switcher button[aria-pressed="true"]{
+  background:var(--surface-strong);
+  color:var(--accent-strong);
+  box-shadow:inset 0 0 0 1px var(--line-strong),0 3px 9px var(--shadow);
+}
+.theme-switcher button:hover{background:var(--surface-strong);}
+@media(max-width:900px){
+  .nav{height:76px;min-height:76px;gap:12px;}
+  .nav-links{top:calc(100% - 1px);}
+  .hero-inner{padding-top:0;}
+  .hero-copy{padding-top:65px;}
+}
+@media(max-width:640px){
+  .hero-copy{padding-top:48px;}
+}
+@media(max-width:420px){
+  .nav{gap:8px;}
+  .theme-switcher{padding:3px;gap:2px;}
+  .theme-switcher button{width:31px;height:33px;min-height:33px;padding:0;}
+  .theme-switcher button svg{width:16px;height:16px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav{transition:none;}
 }
