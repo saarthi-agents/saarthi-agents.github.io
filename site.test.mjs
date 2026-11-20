@@ -115,3 +115,46 @@ test('saved theme is respected; storage refusal safely falls back to system', ()
   assert.equal(b.win.__saarthiTheme.setChoice('light'), true);
   assert.equal(b.doc.documentElement.dataset.theme, 'light');
 });
+
+test('header is sticky in document flow with frosted scrolling state', () => {
+  const css = file('./theme.css');
+  const js = file('./site.js');
+  assert.match(css, /\.nav\s*\{\s*position:sticky;/);
+  assert.match(css, /top:calc\(100% - 1px\)/);
+  assert.match(css, /overflow-x:clip/);
+  assert.match(css, /\.nav\.is-scrolled/);
+  assert.match(css, /backdrop-filter:blur\(30px\)/);
+  assert.match(js, /stickyHeader\?\.classList\.toggle\('is-scrolled'/);
+});
+test('theme switcher uses labelled inline icons, not visible text buttons', () => {
+  const html = file('./index.html');
+  const css = file('./theme.css');
+  const block = html.match(/<div class="theme-switcher"[\s\S]*?<\/div>/)?.[0];
+  assert.ok(block, 'theme switcher group must exist');
+  const buttons = [...block.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)];
+  assert.equal(buttons.length, 3);
+  for (const value of ['auto', 'light', 'dark']) {
+    const button = buttons.find(match => match[0].includes('data-theme-choice="' + value + '"'))?.[0];
+    assert.ok(button, 'missing ' + value + ' choice');
+    assert.match(button, /aria-label="[^"]+"/);
+    assert.match(button, /aria-pressed="(?:true|false)"/);
+    assert.match(button, /<svg aria-hidden="true" focusable="false"/);
+    assert.doesNotMatch(button.replace(/<[^>]+>/g, '').trim(), /\S/,
+      'icon control must not contain visible text');
+  }
+  assert.match(css, /\.theme-switcher button svg/);
+  assert.match(file('./site.js'), /setAttribute\('aria-pressed'/);
+});
+test('pastel glass material uses meaningful alpha transparency in both themes', () => {
+  const css = file('./theme.css');
+  const surfaceTokens = [...css.matchAll(/--surface:\s*rgba\([^)]+\)/g)];
+  assert.ok(surfaceTokens.length >= 2);
+  for (const match of surfaceTokens) {
+    const alpha = Number(match[0].match(/,\s*(0?\.\d+)\)/)?.[1]);
+    assert.ok(alpha > 0 && alpha < 0.8, 'surface should be genuinely translucent');
+  }
+  assert.match(css, /--orb-lilac:/);
+  assert.match(css, /--orb-blush:/);
+  assert.match(css, /linear-gradient\(135deg,var\(--surface-strong\),var\(--surface\)\)/);
+  assert.doesNotMatch(css, /#78DDFB|#A6EBFF|#dfff7e|--lime/i);
+});
