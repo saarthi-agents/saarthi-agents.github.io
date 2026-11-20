@@ -33,11 +33,12 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site/assets
-          cp index.html styles.css theme.css site.js theme-init.js _site/
+          cp index.html styles.css theme.css reference-palette.css site.js theme-init.js _site/
           cp assets/mark.svg _site/assets/
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/theme.css
+          test -s _site/reference-palette.css
           test -s _site/theme-init.js
           test -s _site/assets/mark.svg
           echo "Only the static site, dual-theme styles/scripts, SVG mark and .nojekyll were staged."
