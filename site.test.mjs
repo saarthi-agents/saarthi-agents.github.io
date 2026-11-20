@@ -16,7 +16,7 @@ test('landing page has real content, semantic navigation and truthful preview st
 });
 test('all referenced local static assets exist and SVG brand is accessible', () => {
   const html = file('./index.html');
-  for (const path of ['styles.css','site.js','assets/mark.svg']) {
+  for (const path of ['styles.css','theme.css','reference-palette.css','site.js','assets/mark.svg']) {
     assert.ok(html.includes('./' + path));
     assert.ok(file('./' + path).length > 30);
   }
@@ -42,7 +42,7 @@ test('translucent two-theme design uses no lime or cyan palette', () => {
   assert.match(css, /prefers-color-scheme: dark/);
   assert.match(css, /background:var\(--surface\)/);
   assert.match(css, /backdrop-filter:blur/);
-  assert.match(svg, /fill-opacity="\.13"/);
+  assert.match(svg, /fill-opacity="\.52"/);
   assert.match(html, /color-scheme" content="light dark"/);
   assert.match(html, /theme-init\.js/);
   assert.match(html, /theme\.css/);
@@ -90,7 +90,7 @@ test('Auto follows system; switching Light or Dark persists and updates browser 
   const t = themeHarness({ prefersDark: true });
   assert.equal(t.doc.documentElement.dataset.theme, 'dark');
   assert.equal(t.doc.documentElement.dataset.themePreference, 'auto');
-  assert.equal(t.attributes.content, '#121019');
+  assert.equal(t.attributes.content, '#10182D');
   assert.equal(t.win.__saarthiTheme.setChoice('light'), true);
   assert.equal(t.doc.documentElement.dataset.theme, 'light');
   assert.equal(t.values.get('saarthi-color-theme'), 'light');
@@ -157,4 +157,25 @@ test('pastel glass material uses meaningful alpha transparency in both themes', 
   assert.match(css, /--orb-blush:/);
   assert.match(css, /linear-gradient\(135deg,var\(--surface-strong\),var\(--surface\)\)/);
   assert.doesNotMatch(css, /#78DDFB|#A6EBFF|#dfff7e|--lime/i);
+});
+
+test('image-matched icy blue, pearl glass, royal blue and lilac-pink tokens are applied last', () => {
+  const page = file('./index.html');
+  const palette = file('./reference-palette.css');
+  const svg = file('./assets/mark.svg');
+  const init = file('./theme-init.js');
+  assert.ok(page.indexOf('theme.css') < page.indexOf('reference-palette.css'));
+  for (const hex of ['#D3E1FC', '#E8F1FE', '#F8FCFF', '#3E51E3', '#CD82D4', '#E94D96']) {
+    assert.ok(palette.includes(hex), 'screenshot-derived reference color missing: ' + hex);
+  }
+  assert.match(palette, /:root\[data-theme="dark"\]/);
+  assert.match(palette, /:root:not\(\[data-theme\]\)/);
+  assert.match(palette, /--surface:rgba\(248,252,255,\.38\)/);
+  assert.match(palette, /--surface-strong:rgba\(248,252,255,\.69\)/);
+  assert.match(svg, /<stop stop-color="#3E51E3"/);
+  assert.match(svg, /stop-color="#CD82D4"/);
+  assert.match(svg, /stroke="#E94D96"/);
+  assert.match(svg, /fill="#F8FCFF" fill-opacity="\.52"/);
+  assert.match(init, /'#10182D' : '#D3E1FC'/);
+  assert.doesNotMatch(palette + svg, /#78DDFB|#E6FF9A|#C0FF77|#DFFF7E/i);
 });
