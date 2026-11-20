@@ -1,0 +1,227 @@
+/* Saarthi reference palette — sampled from the supplied frosted e-commerce
+   analytics dashboard image (2048x1536). Background: #D3E1FC; ice: #E8F1FE;
+   porcelain glass: #F8FCFF; royal blue: #3E51E3; lilac: #CD82D4.
+   This is a color/material adaptation, not a copy of dashboard UI/artwork.
+   Keep theme.css for layout/glass components; these are final palette overrides. */
+
+:root, :root[data-theme="light"] {
+  color-scheme: light;
+  --page:#D3E1FC; --page-tint:#E8F1FE;
+  --text:#293145; --secondary:#4F5A74; --tertiary:#636D87;
+  --accent:#3E51E3; --accent-strong:#3044C8;
+  --accent-2:#CD82D4; --coral:#E94D96;
+  --surface:rgba(248,252,255,.38);
+  --surface-strong:rgba(248,252,255,.69);
+  --surface-mauve:rgba(214,221,251,.43);
+  --surface-rose:rgba(246,203,240,.34);
+  --surface-deep:rgba(193,211,252,.42);
+  --line:rgba(255,255,255,.62);
+  --line-strong:rgba(79,100,197,.21);
+  --glint:rgba(255,255,255,.86);
+  --shadow:rgba(58,75,154,.12);
+  --grid-dot:rgba(77,100,192,.14);
+  --ambient-1:rgba(116,168,255,.40);
+  --ambient-2:rgba(229,141,216,.30);
+  --glass-button:rgba(239,245,255,.73);
+  --glass-button-hover:rgba(218,230,255,.83);
+  --code-ink:#293145;
+  --orb-lilac:rgba(133,157,246,.42);
+  --orb-blush:rgba(236,154,226,.35);
+  --orb-periwinkle:rgba(147,177,255,.41);
+  --glass-edge:rgba(255,255,255,.85);
+  --ui-panel:rgba(249,252,255,.66);
+  --ui-panel-dark:rgba(228,237,255,.55);
+  --ui-blue:#3E51E3;
+  --ui-pink:#E94D96;
+  --ui-lilac:#CD82D4;
+  --ink:var(--text); --cream:var(--page); --night:var(--page);
+  --stroke:var(--line);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page:#10182D; --page-tint:#172443;
+  --text:#F4F7FF; --secondary:#CDD8F4; --tertiary:#ADBBDA;
+  --accent:#9DACFF; --accent-strong:#C0C9FF;
+  --accent-2:#F0B2F1; --coral:#FF8EC6;
+  --surface:rgba(42,58,100,.40);
+  --surface-strong:rgba(55,76,124,.66);
+  --surface-mauve:rgba(89,93,163,.36);
+  --surface-rose:rgba(130,66,125,.31);
+  --surface-deep:rgba(72,95,161,.45);
+  --line:rgba(177,198,255,.18);
+  --line-strong:rgba(167,191,255,.34);
+  --glint:rgba(230,238,255,.18);
+  --shadow:rgba(3,8,28,.40);
+  --grid-dot:rgba(184,199,255,.11);
+  --ambient-1:rgba(57,88,209,.42);
+  --ambient-2:rgba(182,77,162,.30);
+  --glass-button:rgba(96,121,206,.24);
+  --glass-button-hover:rgba(114,139,224,.37);
+  --code-ink:#ECF3FF;
+  --orb-lilac:rgba(69,83,197,.39);
+  --orb-blush:rgba(189,80,172,.27);
+  --orb-periwinkle:rgba(87,113,218,.39);
+  --glass-edge:rgba(206,220,255,.18);
+  --ui-panel:rgba(44,62,110,.68);
+  --ui-panel-dark:rgba(57,74,137,.51);
+  --ui-blue:#B2C0FF;
+  --ui-pink:#FFA3D2;
+  --ui-lilac:#E6B9F4;
+  --ink:var(--text); --cream:var(--page); --night:var(--page);
+  --stroke:var(--line);
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme]) {
+    color-scheme:dark;
+    --page:#10182D; --page-tint:#172443;
+    --text:#F4F7FF; --secondary:#CDD8F4; --tertiary:#ADBBDA;
+    --accent:#9DACFF; --accent-strong:#C0C9FF;
+    --accent-2:#F0B2F1; --coral:#FF8EC6;
+    --surface:rgba(42,58,100,.40);
+    --surface-strong:rgba(55,76,124,.66);
+    --surface-mauve:rgba(89,93,163,.36);
+    --surface-rose:rgba(130,66,125,.31);
+    --surface-deep:rgba(72,95,161,.45);
+    --line:rgba(177,198,255,.18);
+    --line-strong:rgba(167,191,255,.34);
+    --glint:rgba(230,238,255,.18);
+    --shadow:rgba(3,8,28,.40);
+    --grid-dot:rgba(184,199,255,.11);
+    --ambient-1:rgba(57,88,209,.42);
+    --ambient-2:rgba(182,77,162,.30);
+    --glass-button:rgba(96,121,206,.24);
+    --glass-button-hover:rgba(114,139,224,.37);
+    --code-ink:#ECF3FF;
+    --orb-lilac:rgba(69,83,197,.39);
+    --orb-blush:rgba(189,80,172,.27);
+    --orb-periwinkle:rgba(87,113,218,.39);
+    --glass-edge:rgba(206,220,255,.18);
+    --ui-panel:rgba(44,62,110,.68);
+    --ui-panel-dark:rgba(57,74,137,.51);
+    --ui-blue:#B2C0FF;
+    --ui-pink:#FFA3D2;
+    --ui-lilac:#E6B9F4;
+    --ink:var(--text);--cream:var(--page);--night:var(--page);
+    --stroke:var(--line);
+  }
+}
+
+/* Frosted translucent shell, diffuse blue and pink lighting like the
+   reference; no opaque solid sections or heavy saturated fill panels. */
+html {background:var(--page);}
+body {
+  background:
+    radial-gradient(ellipse 53% 30% at 80% 3%,var(--orb-periwinkle),transparent 82%),
+    radial-gradient(ellipse 41% 28% at 10% 29%,var(--orb-blush),transparent 77%),
+    radial-gradient(ellipse 60% 27% at 78% 62%,var(--orb-lilac),transparent 83%),
+    radial-gradient(ellipse 52% 27% at 7% 88%,var(--orb-blush),transparent 82%),
+    linear-gradient(140deg,var(--page),var(--page-tint) 54%,var(--page));
+  color:var(--text);
+}
+.hero{
+  background:
+    radial-gradient(ellipse 46% 43% at 80% 23%,var(--orb-periwinkle),transparent 78%),
+    radial-gradient(ellipse 38% 31% at 13% 84%,var(--orb-blush),transparent 82%),
+    transparent;
+}
+.hero-halo{
+  background:radial-gradient(circle,var(--orb-periwinkle),transparent 70%);
+}
+.hero-accent{
+  background:linear-gradient(115deg,var(--ui-blue) 0%,var(--accent) 49%,var(--ui-lilac) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-accent .star{color:var(--ui-pink);-webkit-text-fill-color:var(--ui-pink);}
+.hero-description,.honest-label,.eyebrow,.hero-bottom {color:var(--secondary);}
+.status-pulse,.caption-signal {background:var(--ui-blue);box-shadow:0 0 0 5px var(--ambient-1);}
+.visual-axis.axis-a {background:var(--ui-pink);box-shadow:0 0 18px var(--orb-blush);}
+.visual-axis.axis-b {background:var(--ui-blue);box-shadow:0 0 18px var(--orb-periwinkle);}
+.node-symbol {background:var(--surface-deep);color:var(--ui-blue);}
+.center-core,.agent-node{
+  background:linear-gradient(135deg,var(--ui-panel),var(--surface));
+  border-color:var(--glass-edge);
+  box-shadow:inset 0 1px 0 var(--glass-edge),0 20px 56px var(--shadow);
+}
+.core-ring,.orbit {border-color:var(--line-strong);}
+.nav,.nav.is-scrolled {
+  background:var(--surface);
+  border-color:var(--glass-edge);
+  box-shadow:0 3px 30px var(--shadow),inset 0 1px 0 var(--glint);
+}
+.nav.is-scrolled{background:var(--surface-strong);border-color:var(--line-strong);}
+.theme-switcher{
+  background:var(--ui-panel);
+  border-color:var(--glass-edge);
+  box-shadow:0 5px 18px var(--shadow),inset 0 1px 0 var(--glint);
+}
+.theme-switcher button[aria-pressed="true"]{
+  background:var(--surface-deep);
+  color:var(--ui-blue);
+  border-color:var(--line-strong);
+}
+.nav-links .nav-contact,.button-primary {
+  background:var(--ui-panel);
+  color:var(--accent-strong);
+  border:1px solid var(--line-strong);
+  box-shadow:inset 0 1px 0 var(--glass-edge),0 10px 22px var(--shadow);
+}
+.button-primary:hover,.nav-links .nav-contact:hover{background:var(--glass-button-hover);}
+.button-outline{background:var(--surface);border-color:var(--line-strong);}
+.marquee {
+  background:linear-gradient(90deg,var(--surface-deep),var(--surface-strong),var(--surface-rose));
+  border-color:var(--glass-edge);
+  color:var(--text);
+}
+.story,.process,.roles {
+  background:
+    radial-gradient(ellipse 37% 25% at 86% 22%,var(--orb-periwinkle),transparent 87%),
+    radial-gradient(ellipse 28% 24% at 4% 79%,var(--orb-blush),transparent 87%),
+    transparent;
+}
+.story-panel,.process-card,.role-card{
+  background:linear-gradient(135deg,var(--ui-panel),var(--surface));
+  border:1px solid var(--glass-edge);
+  box-shadow:inset 0 1px 0 var(--glint),0 14px 38px var(--shadow);
+}
+.story-panel-dark,.role-card.role-hero,.process-art-one {
+  background:linear-gradient(140deg,var(--surface-deep),var(--ui-panel));
+}
+.story-panel-light,.process-art-three{
+  background:linear-gradient(140deg,var(--surface-rose),var(--ui-panel));
+}
+.process-art-two{
+  background:linear-gradient(145deg,var(--surface-mauve),var(--surface-deep));
+}
+.manifesto,.trust,.closing {
+  background:linear-gradient(118deg,var(--surface-deep),var(--surface-rose),var(--surface));
+  border-color:var(--glass-edge);
+}
+.manifesto-mark,.closing-symbol{color:var(--ui-lilac);}
+.manifesto h2 em,.closing h2 em,.trust h2 em {color:var(--accent-strong);}
+.trust-items article,.footer small,.role-foot {border-color:var(--line-strong);}
+.trust-node,.trust-node.t2,.trust-node.t3 {
+  color:var(--accent-strong);background:var(--ui-panel);
+  border-color:var(--glass-edge);
+}
+.role-icon,.role-hero .role-icon{background:var(--surface-deep);color:var(--ui-blue);}
+.role-foot,.process-number,.eyebrow-index,.trust-index,.accent-spark{color:var(--ui-blue);}
+.filter.active,.filter:hover{
+  background:var(--surface-deep);border-color:var(--line-strong);color:var(--accent-strong);
+}
+.art-lines{color:var(--ui-lilac);}
+.art-star,.mini-dot.d1{color:var(--ui-pink);background-color:var(--ui-pink);}
+.mini-dot.d2{background:var(--ui-blue);}
+.mini-orbit{border-color:var(--line-strong);}
+.art-check{color:var(--ui-blue);border-color:var(--line-strong);}
+.signal-art>span{color:var(--ui-blue);}
+.signal-art>span:nth-child(2){color:var(--ui-pink);}
+.signal-art>span:nth-child(3){color:var(--ui-lilac);}
+.stack-art>div,.stack-art>div:nth-child(2),.stack-art>div:nth-child(3),.stack-art>div:nth-child(4){
+  background:var(--ui-panel-dark);border-color:var(--glass-edge);
+}
+.footer{
+  background:var(--surface);border-color:var(--glass-edge);
+}
+@media(prefers-reduced-motion:reduce){
+  body{transition:none;}
+}
