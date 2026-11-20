@@ -21,7 +21,7 @@
     document.documentElement.dataset.theme = resolved;
     document.documentElement.dataset.themePreference = choice;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#121019' : '#f6f3f1');
+    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#10182D' : '#D3E1FC');
     window.dispatchEvent(new CustomEvent('saarthi-theme-change', {
       detail: { preference: choice, resolved },
     }));
