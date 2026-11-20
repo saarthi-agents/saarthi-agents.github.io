@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0a0a18">
+  <meta name="theme-color" content="#f6f3f1">
   <link rel="canonical" href="https://saarthi-agents.github.io/">
   <meta property="og:url" content="https://saarthi-agents.github.io/">
   <meta name="description" content="Meet Saarthi: the governed AI employee platform for engineering teams. Explore role blueprints, human approvals, isolated execution and auditable work.">
@@ -15,7 +15,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
+  <script src="./theme-init.js"></script>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./theme.css">
   <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
   <script defer src="./site.js"></script>
 </head>
@@ -28,6 +31,11 @@
       <a href="#vision">The vision</a><a href="#how">How it works</a><a href="#roles">AI employees</a><a href="#trust">Trust by design</a>
       <a class="nav-contact" href="#explore">Explore Saarthi <span aria-hidden="true">↗</span></a>
     </nav>
+    <div class="theme-switcher" role="group" aria-label="Color theme">
+      <button type="button" data-theme-choice="auto" aria-pressed="true" title="Follow device appearance">Auto</button>
+      <button type="button" data-theme-choice="light" aria-pressed="false" title="Use light appearance">Light</button>
+      <button type="button" data-theme-choice="dark" aria-pressed="false" title="Use dark appearance">Dark</button>
+    </div>
     <button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
   </header>
   <main id="main">
