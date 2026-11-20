@@ -179,3 +179,12 @@ test('image-matched icy blue, pearl glass, royal blue and lilac-pink tokens are 
   assert.match(init, /'#10182D' : '#D3E1FC'/);
   assert.doesNotMatch(palette + svg, /#78DDFB|#E6FF9A|#C0FF77|#DFFF7E/i);
 });
+
+test('four new specialist roles are labelled as governed engineering previews, not available employees', () => {
+  const html = file('./index.html');
+  for (const name of ['Data Analyst','AI Engineer','AI Architect','Forward Deployed Engineer']) {
+    assert.match(html, new RegExp('<h3>' + name + '</h3>[^<]*<p>'));
+  }
+  assert.equal((html.match(/Governed blueprint preview/g) ?? []).length,4);
+  assert.doesNotMatch(html,/New role design|available to hire now|production-ready agents/i);
+});
