@@ -38,19 +38,19 @@ test('translucent two-theme design uses no lime or cyan palette', () => {
   const css = file('./theme.css');
   const svg = file('./assets/mark.svg');
   const html = file('./index.html');
-  assert.match(css, /:root\\[data-theme="dark"\\]/);
+  assert.match(css, /:root\[data-theme="dark"\]/);
   assert.match(css, /prefers-color-scheme: dark/);
-  assert.match(css, /background:var\\(--surface\\)/);
+  assert.match(css, /background:var\(--surface\)/);
   assert.match(css, /backdrop-filter:blur/);
-  assert.match(svg, /fill-opacity="\\.13"/);
+  assert.match(svg, /fill-opacity="\.13"/);
   assert.match(html, /color-scheme" content="light dark"/);
-  assert.match(html, /theme-init\\.js/);
-  assert.match(html, /theme\\.css/);
+  assert.match(html, /theme-init\.js/);
+  assert.match(html, /theme\.css/);
   for (const value of ['auto','light','dark']) {
     assert.match(html, new RegExp('data-theme-choice="' + value + '"'));
   }
   assert.doesNotMatch(legacy + css + svg,
-    /--electric|var\\(--electric\\)|#78DDFB|#A6EBFF|#DFF5FF|#dfff7e|#C0FF77|#E6FF9A|--lime|var\\(--lime\\)/i);
+    /--electric|var\(--electric\)|#78DDFB|#A6EBFF|#DFF5FF|#dfff7e|#C0FF77|#E6FF9A|--lime|var\(--lime\)/i);
 });
 
 function themeHarness({ prefersDark = false, saved = null, storageBroken = false } = {}) {
