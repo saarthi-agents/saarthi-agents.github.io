@@ -209,7 +209,8 @@ body {
   background:var(--surface-deep);border-color:var(--line-strong);color:var(--accent-strong);
 }
 .art-lines{color:var(--ui-lilac);}
-.art-star,.mini-dot.d1{color:var(--ui-pink);background-color:var(--ui-pink);}
+.art-star{color:var(--ui-pink);}
+.mini-dot.d1{background-color:var(--ui-pink);}
 .mini-dot.d2{background:var(--ui-blue);}
 .mini-orbit{border-color:var(--line-strong);}
 .art-check{color:var(--ui-blue);border-color:var(--line-strong);}
