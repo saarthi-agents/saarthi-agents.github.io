@@ -38,9 +38,11 @@
     if (e.matches) blocks.forEach(block => block.classList.add('visible'));
   });
   const progress = document.querySelector('.progress');
+  const stickyHeader = document.querySelector('.nav');
   let scheduled = false;
   const updateScroll = () => {
     scheduled = false;
+    stickyHeader?.classList.toggle('is-scrolled', window.scrollY > 12);
     if (!progress) return;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = (max > 0 ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 100) + '%';
